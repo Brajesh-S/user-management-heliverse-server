@@ -1,11 +1,17 @@
 // models/teamModel.js
+
 const mongoose = require('mongoose');
 
-const teamSchema = new mongoose.Schema({
-  name: { type: String, required: true }, 
-  users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], 
-  createdAt: { type: Date, default: Date.now },
-}, { collection: 'Teams' }); 
+const teamSchema = new mongoose.Schema(
+  {
+    id: { type: Number, unique: true, required: true },
+    name: { type: String, unique: true, required: true },
+    users: [{ type: Number, required: true }], // Using Number type for custom user IDs
+  },
+  { collection: 'Teams' }
+);
 
-// Export the Team model
-module.exports = mongoose.model('Team', teamSchema);
+// Ensure to use a unique and consistent collection name
+const Team = mongoose.model('Team', teamSchema);
+
+module.exports = Team;
