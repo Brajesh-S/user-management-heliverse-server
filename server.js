@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3001"],
+    origin: ["http://localhost:3001","https://user-management-heliverse-server.onrender.com"],
     methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
