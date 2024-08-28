@@ -10,12 +10,13 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3001","https://user-management-heliverse-server.onrender.com"],
+    origin: ["http://localhost:3001","https://user-management-heliverse-server.onrender.com","https://user-management-clientele.netlify.app/"],
     methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
-
+app.use("/api/users", userRoutes);
+app.use("/api/team", teamRoutes);
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI);
@@ -26,8 +27,7 @@ db.once("open", () => {
   console.log("Connected to MongoDB");
 });
 
-app.use("/api/users", userRoutes);
-app.use("/api/team", teamRoutes);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
