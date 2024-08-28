@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3001","https://user-management-heliverse-server.onrender.com","https://user-management-clientele.netlify.app/"],
+    origin: ["http://localhost:3001","https://user-management-heliverse-server.onrender.com","https://user-management-clientele.netlify.app"],
     methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
