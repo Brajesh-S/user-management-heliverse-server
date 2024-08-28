@@ -1,3 +1,4 @@
+//userController.js
 const User = require('../models/userModel');
 
 // Function to generate a new user ID
@@ -8,14 +9,14 @@ const generateUserId = async () => {
 
 // Get all users with optional filtering and pagination
 exports.getUsers = async (req, res) => {
-  const { domain, gender, available, search, page = 1, limit = 10 } = req.query;
+  const { domain, gender, available, search, page = 1, limit = 20 } = req.query;
 
   const filter = {};
   if (domain) filter.domain = domain;
   if (gender) filter.gender = gender;
   if (available) filter.available = available === 'true';
   if (search) filter.first_name = new RegExp(search, 'i');
-
+  
   try {
     const users = await User.find(filter)
       .skip((page - 1) * limit)

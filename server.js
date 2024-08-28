@@ -1,8 +1,18 @@
+//server.js
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors"); 
 require("dotenv").config();
 
 const app = express();
+
+app.use(
+    cors({
+      origin: ["http://localhost:3001"],
+      methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
+      credentials: true,
+    })
+  );
 
 app.use(express.json());
 
