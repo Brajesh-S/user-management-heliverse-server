@@ -9,6 +9,9 @@ const generateTeamId = async () => {
 
 exports.createTeam = async (req, res) => {
   const { name, userIds } = req.body;
+  if (!name || !userIds) {
+    return res.status(400).json({ error: "Missing 'name' or 'userIds' in request body" });
+  }
 
   try {
     const existingTeam = await Team.findOne({ name });
@@ -39,7 +42,7 @@ exports.createTeam = async (req, res) => {
     const newTeam = new Team({ id: newTeamId, name, users: userIds });
     await newTeam.save();
 
-    res.status(201).json(newTeam);
+    res.status(201).json({ message: "Team created successfully", team: newTeam });
   } catch (error) {
     if (error.code === 11000) {
       res.status(400).json({ error: "Team name or ID already exists" });

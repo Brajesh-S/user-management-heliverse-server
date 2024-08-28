@@ -7,7 +7,7 @@ const teamRoutes = require("./routes/teamRoutes");
 require("dotenv").config();
 
 const app = express();
-
+app.use(express.json());
 app.use(
   cors({
     origin: ["http://localhost:3001","https://user-management-heliverse-server.onrender.com","https://user-management-clientele.netlify.app"],
@@ -17,7 +17,7 @@ app.use(
 );
 app.use("/api/users", userRoutes);
 app.use("/api/team", teamRoutes);
-app.use(express.json());
+
 
 mongoose.connect(process.env.MONGO_URI);
 
